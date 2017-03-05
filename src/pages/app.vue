@@ -1,6 +1,6 @@
 <template>
 <div class="wrapper">
-    <div class="content-wrapper">
+    <div class="">
         <router-view></router-view>
     </div>
 </div>

@@ -4,10 +4,10 @@ import 'whatwg-fetch';
 
 import routes from './routers/';
 import App from './pages/app.vue';
+import $ from 'webpack-zepto';
 
 Vue.use(VueRouter);
 
-var $ = window.jQuery;
 $.ajaxSettings.crossDomain = true;
 
 // 实例化VueRouter
