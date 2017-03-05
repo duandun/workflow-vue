@@ -12,15 +12,6 @@
   import 'element-ui/lib/theme-default/index.css';
   Vue.use(ElementUI);
 
-  // 全局扩展form-item组件
-  Vue.component('ElFormItem', Vue.component('ElFormItem').extend({
-      mounted() {
-          this.$on('el.form.change', function() {
-              this.dispatch('ElForm', 'change');
-          });
-      }
-  }));
-
   export default {
 
   };
