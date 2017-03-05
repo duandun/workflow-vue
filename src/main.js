@@ -2,7 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import 'whatwg-fetch';
 
-import routes from './routers/';
+import routes from './routers';
+import store from './store';
 import App from './pages/app.vue';
 import $ from 'webpack-zepto';
 
@@ -26,7 +27,7 @@ new Vue({
 
     created() {
     },
-
+    store,
     router,
     render: h => h(App)
 });
