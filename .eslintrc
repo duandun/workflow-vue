@@ -1,0 +1,28 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "root": true,
+    "extends": "standard",
+    "parser": "babel-eslint",
+    "plugins": [
+        "html",
+        "vue"
+    ],
+    "rules": {
+        "arrow-parens": 0,
+        //"indent": ["error", 4, { "SwitchCase": 1 }],
+        "indent": 0,
+        "eol-last": 0,
+        //"semi": ["error", "always"],
+        "semi" : 0,
+        "space-before-function-paren": 0,
+        "no-multi-spaces": 0,
+        "no-trailing-spaces": 0,
+        "no-useless-escape": 0,
+        "comma-spacing" : 0,
+        "spaced-comment" : 0,
+    }
+}
