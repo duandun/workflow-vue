@@ -6,7 +6,6 @@
 ## 架构参考列表：
 * [Vue-cnodejs](https://github.com/shinygang/Vue-cnodejs)
 * [vue-spa-template](https://github.com/hanan198501/vue-spa-template)
-* [vue-mis](https://github.com/zhuchongyue/vue-mis)
 
 ## 相关手册
 * [Vue2.0 英文文档](https://vuejs.org/guide/)
@@ -55,14 +54,3 @@ npm run build
 ├── server.js          // webpack-dev-server服务配置
 └── webpack.config.js  // Webpack 配置文件
 </pre>
-
-
-## 设计总体原则
-> 1. 总体上的原则是`分而治之，简单易用`;
-> 2. 所谓`分而治之`是把复杂的东西拆分一个个小的组件，每一个页面都是一个个组件拼装而成，通过这样来降低总体的复杂度;
-> 3. 所谓`简单易用`是指在拆分的同时要保持简单易用，过渡拆分的后果是修改一个简单的组件都要分别要去好几个地方去修改，增加了维护的复杂度，所以要根据组件的实际情况和复杂度来确定是否需要拆分，例如每一个组件依赖的图片，我建议直接放在组件自身的`images`目录下，而不是放到assets里面。
-
-举个例子：如果我们要造一个`机器人`，我们一般不把整个机器人整体做出来，而是拆分成`头，身体，胳膊`等组件，然后分别制造，最后组装成一个机器人；但是一般我们不会把机器人的`指甲`拆分成`指甲本身，指甲的颜色，指甲的长度...`,而是把`指甲`这个最小组件一块进行制造。
-
-
-
