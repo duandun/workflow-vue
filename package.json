@@ -98,7 +98,6 @@
     "moment": "^2.15.2",
     "sortablejs": "^1.5.0-rc1",
     "vue": "2.1.0",
-    "generate-schema": "git@github.com:winnieBear/generate-schema.git",
     "handlebars": "^4.0.6",
     "lodash": "^3.10.1",
     "sprintf-js": "^1.0.3",
