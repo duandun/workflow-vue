@@ -1,4 +1,4 @@
-# LeSports cms 前端代码
+# Workflow-vue 前端代码
 
 基于 Vue2.0的SPA应用，采用webpack进行构建。
 
@@ -24,7 +24,7 @@
 npm install
 ```
 
-启动服务(http://localhost:8090)
+启动服务(http://localhost:8050)
 
 ```
 npm start

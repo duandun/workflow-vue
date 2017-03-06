@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
-config.entry.unshift('webpack-dev-server/client?http://localhost:8090', 'webpack/hot/dev-server');
+config.entry.unshift('webpack-dev-server/client?http://localhost:8050', 'webpack/hot/dev-server');
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 var compiler = webpack(config);
@@ -11,4 +11,4 @@ var app = new WebpackDevServer(compiler, {
     hot: true,
     historyApiFallback: true
 });
-app.listen(8090);
+app.listen(8050);

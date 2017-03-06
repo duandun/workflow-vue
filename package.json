@@ -1,7 +1,7 @@
 {
-  "name": "lesports-fe-cms",
-  "version": "1.0.0",
-  "description": "LeSports cms 前端代码",
+  "name": "workflow-vue",
+  "version": "0.0.1",
+  "description": "workflow-vue",
   "main": "index.html",
   "scripts": {
     "start": "node server.js",
@@ -16,16 +16,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://git.devops.letv.com/lesports-fe-pc/lesports-fe-cms"
+    "url": "https://github.com/duandun/workflow-vue.git"
   },
   "keywords": [
-    "lesports-fe-cms",
+    "Workflow-vue",
     "WebApp",
     "Vue",
     "Webpack",
     "vue.js"
   ],
-  "author": "",
+  "author": "CR",
   "license": "ISC",
   "engines": {
     "node": "^4.2.1"
@@ -47,7 +47,6 @@
     "css-loader": "^0.23.0",
     "cssnext-loader": "^1.0.1",
     "del": "^2.0.2",
-    "element-ui": "1.0.3",
     "eslint": "^3.7.1",
     "eslint-config-standard": "^6.2.0",
     "eslint-friendly-formatter": "^2.0.6",
@@ -90,22 +89,24 @@
     "vue2-ace-editor": "0.0.2",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.12.0",
-    "webpack-zepto": "0.0.1"
+    "webpack-zepto": "^0.0.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0",
-    "element-ui": "1.0.3",
+    "brace-diff": "^0.1.2",
+    "element-ui": "1.2.3",
+    "handlebars": "^4.0.6",
+    "jszip": "^3.1.3",
+    "lodash": "^3.10.1",
     "moment": "^2.15.2",
     "sortablejs": "^1.5.0-rc1",
-    "vue": "2.1.0",
-    "handlebars": "^4.0.6",
-    "lodash": "^3.10.1",
     "sprintf-js": "^1.0.3",
     "string-replace-async": "^1.2.0",
-    "velocityjs": "^0.9.1",
+    "vue": "^2.1.6",
     "vue-i18n": "^4.7.1",
     "vue-router": "^2.0.1",
     "vue-sortable": "git://github.com/MunGell/vue-sortable#77c26994",
+    "vue-template-compiler": "^2.1.6",
     "vue-validator": "^1.4.4",
     "vuex": "^2.0.0",
     "vuex-router-sync": "^2.1.1",
