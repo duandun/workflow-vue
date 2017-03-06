@@ -15,12 +15,9 @@
                 <root-node v-for="item in allNodes" :currentComponents="item"></root-node>
             </g>
         </svg>
-
-        <control-panel></control-panel>
     </div>
 </template>
 <script>
-import ControlPanel from '../../components/controlPanel.vue';
 import RootNode from '../../components/rootNode.vue';
 import { mapGetters } from 'vuex';
 
@@ -46,7 +43,6 @@ export default {
 
     },
     components: {
-        ControlPanel,
         RootNode
     }
 };

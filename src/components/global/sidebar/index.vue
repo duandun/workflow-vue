@@ -1,14 +1,17 @@
 <template lang="html">
     <aside class="main-sidebar">
         <section class="sidebar">
-            <ul class="sidebar-menu">
+            <!-- <ul class="sidebar-menu">
                 <li>首页</li>
-            </ul>
+            </ul> -->
+            <control-panel></control-panel>
         </section>
     </aside>
 </template>
 
 <script>
+import ControlPanel from '../../controlPanel.vue';
+
 export default {
     data() {
         return {
@@ -20,6 +23,9 @@ export default {
     },
     methods: {
 
+    },
+    components: {
+        ControlPanel
     }
 };
 </script>
