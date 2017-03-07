@@ -1,38 +1,60 @@
 <template lang="html">
-    <components
-        :is="currentComponents">
-    </components>
+    <g id="LAYER_NODE">
+        <use :xlink:href="item.name" v-for="item in allNodes" :x="item.x" :y="item.y" data-type="node"
+            :data-key="item.dataKey"
+        ></use>
+    </g>
 </template>
 
 <script>
-/** TODO rootNode bind different components according to the props  */
+import { mapGetters, mapActions } from 'vuex';
+import { CONF } from '../constant';
 
-import StartNode from './nodes/start.vue';
+const handlePosValue = (pos) => {
+    let screenSize = window.screenSize || 'small';
+    let x = pos.mouseX - CONF.SCREEN_SIZE[screenSize].offsetX - 15;
+    let y = pos.mouseY - CONF.SCREEN_SIZE[screenSize].offsetY - 10;
+    return {
+        x,
+        y
+    };
+};
 
 export default {
     props: {
-        currentComponents: {
-            type: Object,
-            default: function() {
-                return StartNode;
-            }
-        }
+
     },
     data() {
         return {
 
         };
     },
+    computed: {
+        ...mapGetters({
+            allNodes: 'getAllNodes',
+            mousePos: 'getMousePos'
+        })
+    },
+    watch: {
+        'mousePos': function() {
+            this.setCurNodePos(handlePosValue(this.mousePos));
+        }
+    },
     created() {
 
     },
-    mounted() {
-
+    methods: {
+        ...mapActions([
+            'setCurNodePos'
+        ])
     },
     components: {
     }
 };
 </script>
 
-<style lang="css">
+<style lang="sass" scoped>
+    use {
+        cursor: move;
+    }
 </style>

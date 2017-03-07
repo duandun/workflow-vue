@@ -1,65 +1,65 @@
 <template lang="html">
     <div class="control-panel-wrap">
         <ul class="nodes-classify">
-            <li v-for="item in nodesList" :class="{ active: item.isActive }" @mousedown.stop="onClickNode($event, item)">
-                {{ item.name }}
+            <li v-for="item in nodesList" :class="{ active: item.isActive }"
+                @click="onClickNode($event, item)"
+            >
+                {{ item.title }}
             </li>
         </ul>
-        <frame-box v-if="activated" :styleObject="frameStyle" @frame-move="frameMove" ref="myFrame"></frame-box>
+        <!-- <frame-box v-if="activated"></frame-box> -->
     </div>
 </template>
 
 <script>
 /** TODO control panel in the left part  */
-
-import { mapActions } from 'vuex';
-import StartNode from './nodes/start.vue';
-import EndNode from './nodes/end.vue';
-import ForkNode from './nodes/fork.vue';
-import UserNode from './nodes/user.vue';
+import { mapActions, mapGetters } from 'vuex';
 import { CONF } from '../constant';
+import _ from 'lodash';
 
-const handleClientXY = (event) => {
-    let cx = event.clientX - 16;
-    let cy = event.clientY - 10;
+const handlePosValue = (pos) => {
+    let x = pos.mouseX - 16;
+    let y = pos.mouseY - 10;
     return {
-        cx,
-        cy
+        x,
+        y
     };
 };
 
 const FrameBox = {
-    template: '<div class="drag-box" :style="styleObject" @mousemove="mouseMove" @click="onFrameClick" @mouseup="onMouseUp"></div>',
+    template: '<div class="drag-box" :style="styleObject" data-type="frameBox"></div>',
     props: {
-        styleObject: {
-            type: Object,
-            default: function() {
-                return {
-                    top: 0,
-                    left: 0
-                };
-            }
-        }
+
     },
     data() {
         return {
-            freeze: true
+            freeze: true,
+            styleObject: {
+                top: '100px',
+                left: '240px'
+            }
         };
     },
+    computed: {
+        ...mapGetters({
+            mousePos: 'getMousePos'
+        })
+    },
+    watch: {
+        mousePos: function() {
+            this.setStyleObject(handlePosValue(this.mousePos));
+        }
+    },
     created() {
-        this.freeze = false;
+
     },
     methods: {
-        onMouseUp(event) {
-            this.freeze = true;
-        },
-        mouseMove(event) {
-            if (!this.freeze) {
-                this.$emit('frame-move', handleClientXY(event));
-            }
-        },
-        onFrameClick(event) {
-
+        ...mapActions([
+            'setCurNodePos'
+        ]),
+        setStyleObject(pos) {
+            this.styleObject.top = pos.y + 'px';
+            this.styleObject.left = pos.x + 'px';
         }
     }
 };
@@ -68,16 +68,11 @@ export default {
     data() {
         return {
             nodesList: CONF.NODES_LIST,
-            activated: false,
-            frameStyle: {}
+            activated: false
         };
     },
     created() {
-        // TODO for test
-        this.addOneNode(StartNode);
-        this.addOneNode(EndNode);
-        this.addOneNode(ForkNode);
-        this.addOneNode(UserNode);
+
     },
     methods: {
         ...mapActions({
@@ -87,16 +82,10 @@ export default {
             this.nodesList.forEach((item) => {
                 item.isActive = item === node;
             });
-            this.activated = true;
-            this.frameMove(event);
-        },
-        frameMove(event) {
-            let cx = event.clientX || event.cx;
-            let cy = event.clientY || event.cy;
-            this.frameStyle = {
-                top: cy + 'px',
-                left: cx + 'px'
-            }
+            let tmpConf = _.cloneDeep(node);
+            // generates unique key_ for node
+            tmpConf['dataKey'] = _.uniqueId('key_');
+            this.addOneNode(tmpConf);
         }
     },
     components: {

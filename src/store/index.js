@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import createLogger from 'vuex/dist/logger';
 import Lines from './lines';
 import nodes from './nodes';
+import Drag from './drag';
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     getters: {
     },
     modules: {
+        Drag,
         Lines,
         nodes
     },

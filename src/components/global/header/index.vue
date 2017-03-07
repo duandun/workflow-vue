@@ -24,6 +24,7 @@ export default {
     methods: {
         toggleMenu() {
             $('body').toggleClass('sidebar-collapse');
+            window.screenSize = window.screenSize === 'large' ? 'small' : 'large';
         }
     }
 };
