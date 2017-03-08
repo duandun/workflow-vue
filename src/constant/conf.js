@@ -40,3 +40,8 @@ export const SCREEN_SIZE = {
         offsetY: 50
     }
 };
+
+export const MODE = {
+    LINK: 'link',
+    MOVE: 'move'
+};

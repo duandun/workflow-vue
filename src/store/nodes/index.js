@@ -14,8 +14,8 @@ const mutations = {
         state.currentNode = node;
     },
     [CONST.SET_POS] (state, pos) {
-        state.currentNode.x = pos.x + 'px';
-        state.currentNode.y = pos.y + 'px';
+        state.currentNode.x = pos.x;
+        state.currentNode.y = pos.y;
     }
 };
 

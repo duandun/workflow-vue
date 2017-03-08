@@ -4,6 +4,9 @@
         <Sidebar></Sidebar>
         <router-view></router-view>
         <Footers></Footers>
+        <right-menu v-show="showRightMenu" :styleObj="rightMenuPos"
+         @closeMenu="showRightMenu = false"
+         ></right-menu>
     </div>
 </template>
 
@@ -15,13 +18,15 @@
   import Footers from '../components/global/footer/index.vue';
   import Headers from '../components/global/header/index.vue';
   import Sidebar from '../components/global/sidebar/index.vue';
+  import RightMenu from '../components/rightMenu.vue';
   import { CONF } from '../constant';
   Vue.use(ElementUI);
 
   export default {
       data() {
           return {
-
+              showRightMenu: false,
+              rightMenuPos: {}
           };
       },
       computed: {
@@ -42,6 +47,21 @@
               'resetCurNode'
           ]),
           onMouseDown(event) {
+              if (event.button === 2) {
+                  document.oncontextmenu = function(ev) {
+                      ev.preventDefault();
+                      return false;
+                  }
+                  let mouseX = event.clientX || 0;
+                  let mouseY = event.clientY || 0;
+                  this.rightMenuPos = {
+                      top: mouseY + 'px',
+                      left: mouseX + 'px'
+                  };
+                  this.showRightMenu = true;
+                  return;
+              }
+              this.showRightMenu = false;
               let elem = event.target;
               let elemType = elem.getAttribute('data-type');
               let dataKey = elem.getAttribute('data-key');
@@ -65,7 +85,8 @@
       components: {
           Headers,
           Sidebar,
-          Footers
+          Footers,
+          RightMenu
       }
   };
 </script>
