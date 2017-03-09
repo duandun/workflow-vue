@@ -1,7 +1,5 @@
 <template lang="html">
     <g id="LAYER_CONNECTION">
-        <!-- data-startNode 保存线段开始节点 data-key，
-            data-endNode 保存线段结束节点 data-end -->
         <polyline v-for="item in allLines" fill="none" stroke="#909090" stroke-width="2"
             cursor="pointer" marker-end="url(#markerArrow)" marker-start=""
             :points="filterPos(`${item.startNode.x},${item.startNode.y} ${item.endNode.x},${item.endNode.y}`)"
