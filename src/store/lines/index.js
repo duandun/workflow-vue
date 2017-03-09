@@ -1,13 +1,5 @@
 import * as CONST from './const.js';
 
-// const struct = {
-//     startPos: '',
-//     endPos: '',
-//     dataKey: '',
-//     startNodeKey: '',
-//     endNodeKey: ''
-// }
-
 const state = {
     allLines: [],
     affectedLines: [],
