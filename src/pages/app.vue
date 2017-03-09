@@ -26,7 +26,8 @@
       data() {
           return {
               showRightMenu: false,
-              rightMenuPos: {}
+              rightMenuPos: {},
+              leftMouseDown: false
           };
       },
       computed: {
@@ -64,22 +65,19 @@
                   return;
               }
               this.showRightMenu = false;
-            //   let elem = event.target;
-            //   let elemType = elem.getAttribute('data-type');
-            //   let dataKey = elem.getAttribute('data-key');
-            //   if (CONF.DRAGGABLE_ELEM.indexOf(elemType) !== -1 && dataKey) {
-            //       this.setCurNode(dataKey).then(() => {
-            //           this.startToDrag();
-            //       });
-            //   }
+              this.leftMouseDown = true;
           },
           onMouseMove(event) {
+              if (!this.leftMouseDown) {
+                  return;
+              }
               this.changeMousePos({
                   mouseX: event.clientX,
                   mouseY: event.clientY
               });
           },
           onMouseUp(event) {
+              this.leftMouseDown = false;
               if (this.mode === MODE.LINK) {
                   this.changeDragLineVisible(false);
                   return;

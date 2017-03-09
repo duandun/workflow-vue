@@ -10,7 +10,7 @@
 
          <polyline fill="none" stroke="#909090" stroke-width="2" v-if="dragLineVisible"
              cursor="pointer" marker-end="url(#markerArrow)" marker-start=""
-             :points="filterDragPos(`${dragLine.startNode.x},${dragLine.startNode.y} ${dragLine.endNode.x},${dragLine.endNode.y}`)"
+             :points="filterPos(`${dragLine.startNode.x},${dragLine.startNode.y} ${dragLine.endNode.x},${dragLine.endNode.y}`, false)"
           ></polyline>
     </g>
 </template>
@@ -73,23 +73,16 @@ export default {
             'setLinesPos',
             'setDragLine'
         ]),
-        filterDragPos(pos) {
-            // FIXME 这个方法和 filterPos 重复了，需要做一下重构
+        filterPos(pos, flag = true) {
             let arr = pos.split(' ');
             let startPos = arr[0].split(',');
             let endPos = arr[1].split(',');
-            let add = a => Number(a) + 19;
-            startPos = R.map(add, startPos);
-            return `${startPos[0]},${startPos[1]} ${endPos[0]},${endPos[1]}`;
-        },
-        filterPos(pos) {
-            let arr = pos.split(' ');
-            let startPos = arr[0].split(',');
-            let endPos = arr[1].split(',');
-            let add = a => Number(a) + 19;
-            startPos = R.map(add, startPos);
-            endPos = R.map(add, endPos);
-            endPos = this.calcEndPos(startPos, endPos);
+            let add19 = a => Number(a) + 19;
+            startPos = R.map(add19, startPos);
+            if (flag) {
+                endPos = R.map(add19, endPos);
+                endPos = this.calcEndPos(startPos, endPos);
+            }
             return `${startPos[0]},${startPos[1]} ${endPos[0]},${endPos[1]}`;
         },
         calcEndPos(startPos, endPos) {
@@ -103,18 +96,13 @@ export default {
             let endObjY = endPos[1];
 
             // 四个点距离起始位置的距离
-            let bottom = Math.pow((squire(endObjY + 20 - startObjY) + squire(endObjX - startObjX)), 0.5);
-            let top = Math.pow((squire(endObjY - 20 - startObjY) + squire(endObjX - startObjX)), 0.5);
-            let left = Math.pow((squire(endObjY - startObjY) + squire(endObjX - 20 - startObjX)), 0.5);
-            let right = Math.pow((squire(endObjY - startObjY) + squire(endObjX + 20 - startObjX)), 0.5);
+            let bottom = squire(endObjY + 20 - startObjY) + squire(endObjX - startObjX);
+            let top = squire(endObjY - 20 - startObjY) + squire(endObjX - startObjX);
+            let left = squire(endObjY - startObjY) + squire(endObjX - 20 - startObjX);
+            let right = squire(endObjY - startObjY) + squire(endObjX + 20 - startObjX);
 
-            // 从小到大排序
-            let array = [bottom, top, left, right];
-            array.sort(function(a,b) {
-                return a > b ? 1 : -1;
-            });
-
-            switch (array[0]) {
+            let min = R.reduce(R.min, Infinity, [bottom, top, left, right]);
+            switch (min) {
                 case bottom:
                     return [endObjX, endObjY + 23];
                 case top:
