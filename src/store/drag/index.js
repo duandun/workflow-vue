@@ -35,9 +35,7 @@ const actions = {
         commit(CONST.TOGGLE_DRAG, false);
     },
     changeMousePos({ commit, state }, pos) {
-        if (state.startDrag) {
-            commit(CONST.MOUSE_POS, pos);
-        }
+        commit(CONST.MOUSE_POS, pos);
     }
 };
 

@@ -15,7 +15,8 @@
 /** TODO control panel in the left part  */
 import { mapActions, mapGetters } from 'vuex';
 import { CONF } from '../constant';
-import _ from 'lodash';
+import R from 'ramda';
+import { helper } from '../utils';
 
 const handlePosValue = (pos) => {
     let x = pos.mouseX - 16;
@@ -82,9 +83,9 @@ export default {
             this.nodesList.forEach((item) => {
                 item.isActive = item === node;
             });
-            let tmpConf = _.cloneDeep(node);
+            let tmpConf = R.clone(node);
             // generates unique key_ for node
-            tmpConf['dataKey'] = _.uniqueId('key_');
+            tmpConf['dataKey'] = helper.guid();
             this.addOneNode(tmpConf);
         }
     },

@@ -1,5 +1,5 @@
 import * as CONST from './const.js';
-import _ from 'lodash';
+import R from 'ramda';
 
 const state = {
     allNodes: [],
@@ -30,7 +30,7 @@ const actions = {
         commit(CONST.ADD_ONE_NODE, node);
     },
     setCurNodePos({ commit, state }, pos) {
-        if (!_.isEmpty(state.currentNode)) {
+        if (!R.isEmpty(state.currentNode)) {
             commit(CONST.SET_POS, pos);
         }
     },

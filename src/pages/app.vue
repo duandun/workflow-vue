@@ -19,7 +19,7 @@
   import Headers from '../components/global/header/index.vue';
   import Sidebar from '../components/global/sidebar/index.vue';
   import RightMenu from '../components/rightMenu.vue';
-  import { CONF } from '../constant';
+  import { MODE } from '../constant/conf.js';
   Vue.use(ElementUI);
 
   export default {
@@ -30,9 +30,10 @@
           };
       },
       computed: {
-          ...mapGetters([
-              'getMousePos'
-          ])
+          ...mapGetters({
+              getMousePos: 'getMousePos',
+              mode: 'getMode'
+          })
       },
       created() {
 
@@ -44,7 +45,8 @@
               'stopDrag',
               'setCurNode',
               'setCurNodePos',
-              'resetCurNode'
+              'resetCurNode',
+              'changeDragLineVisible'
           ]),
           onMouseDown(event) {
               if (event.button === 2) {
@@ -62,14 +64,14 @@
                   return;
               }
               this.showRightMenu = false;
-              let elem = event.target;
-              let elemType = elem.getAttribute('data-type');
-              let dataKey = elem.getAttribute('data-key');
-              if (CONF.DRAGGABLE_ELEM.indexOf(elemType) !== -1 && dataKey) {
-                  this.setCurNode(dataKey).then(() => {
-                      this.startToDrag();
-                  });
-              }
+            //   let elem = event.target;
+            //   let elemType = elem.getAttribute('data-type');
+            //   let dataKey = elem.getAttribute('data-key');
+            //   if (CONF.DRAGGABLE_ELEM.indexOf(elemType) !== -1 && dataKey) {
+            //       this.setCurNode(dataKey).then(() => {
+            //           this.startToDrag();
+            //       });
+            //   }
           },
           onMouseMove(event) {
               this.changeMousePos({
@@ -78,6 +80,10 @@
               });
           },
           onMouseUp(event) {
+              if (this.mode === MODE.LINK) {
+                  this.changeDragLineVisible(false);
+                  return;
+              }
               this.stopDrag();
               this.resetCurNode();
           }
