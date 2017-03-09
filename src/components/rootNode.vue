@@ -2,6 +2,10 @@
     <g id="LAYER_NODE">
         <use :xlink:href="item.name" v-for="item in allNodes" :x="item.x" :y="item.y" data-type="node"
             :data-key="item.dataKey"
+            @mousemove="onMouseMove($event, item)"
+            @mouseleave="onMouseLeave($event, item)"
+            @mousedown="onMouseDown($event, item)"
+            @mouseup="onMouseUp($event, item)"
         ></use>
     </g>
 </template>
@@ -9,6 +13,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { CONF } from '../constant';
+import { MODE } from '../constant/conf.js';
+import { helper } from '../utils';
 
 const handlePosValue = (pos) => {
     let screenSize = window.screenSize || 'small';
@@ -26,17 +32,22 @@ export default {
     },
     data() {
         return {
-
         };
     },
     computed: {
         ...mapGetters({
             allNodes: 'getAllNodes',
-            mousePos: 'getMousePos'
+            mousePos: 'getMousePos',
+            mode: 'getMode',
+            dragLineVisible: 'getDragLineVisible',
+            dragLine: 'getDragLine'
         })
     },
     watch: {
         'mousePos': function() {
+            if (this.mode === MODE.LINK) {
+                return;
+            }
             this.setCurNodePos(handlePosValue(this.mousePos));
         }
     },
@@ -45,8 +56,46 @@ export default {
     },
     methods: {
         ...mapActions([
-            'setCurNodePos'
-        ])
+            'addOneLine',
+            'startToDrag',
+            'setCurNode',
+            'setCurNodePos',
+            'setDragLine',
+            'changeDragLineVisible'
+        ]),
+        onMouseDown(event, node) {
+            if (this.mode === MODE.MOVE) {
+                this.setCurNode(node.dataKey).then(() => {
+                    this.startToDrag();
+                });
+                return;
+            }
+            // 显示连接线段
+            let line = {
+                dataKey: helper.guid(),
+                startNode: node,
+                endNode: node
+            };
+            this.changeDragLineVisible(true);
+            this.setDragLine(line);
+        },
+        onMouseUp(event, node) {
+            // 若在 node 上 mouseup 则需要检测是否有相关连线操作
+            if (this.dragLineVisible) {
+                let line = {
+                    dataKey: helper.guid(),
+                    startNode: this.dragLine.startNode,
+                    endNode: node
+                }
+                this.addOneLine(line);
+            }
+        },
+        onMouseLeave(event, node) {
+
+        },
+        onMouseMove(event, node) {
+
+        }
     },
     components: {
     }

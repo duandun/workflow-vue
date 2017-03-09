@@ -5,6 +5,9 @@
                 <pattern id="grid" x="0" y="0" width="20"z height="20" patternUnits="userSpaceOnUse">
         			<polyline points="0,20 20,20 20,0" style="fill:none;stroke:#f0f0f0;stroke-width:1" />
         		</pattern>
+                <marker id="markerArrow" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                    <path d="M 0 0 L 8 4 L 0 8 z" stroke="#909090" fill="#909090"></path>
+                </marker>
                 <g id="auto_icon">
 					<rect x="1" y="1" width="38" height="38" fill="#fff" stroke="#1388D6" stroke-width="2"/>
 					<path d="M36 21.969v-4l-4.781-1.992c-0.133-0.375-0.273-0.738-0.445-1.094l1.93-4.805-2.829-2.828-4.762 1.961c-0.363-0.176-0.734-0.324-1.117-0.461l-2.027-4.75h-4l-1.977 4.734c-0.398 0.141-0.781 0.289-1.16 0.469l-4.754-1.91-2.828 2.828 1.938 4.711c-0.188 0.387-0.34 0.781-0.485 1.188l-4.703 2.011v4l4.707 1.961c0.145 0.406 0.301 0.801 0.488 1.188l-1.902 4.742 2.828 2.828 4.723-1.945c0.379 0.18 0.766 0.324 1.164 0.461l2.023 4.734h4l1.98-4.758c0.379-0.141 0.754-0.289 1.113-0.461l4.797 1.922 2.828-2.828-1.969-4.773c0.168-0.359 0.305-0.723 0.438-1.094l4.782-2.039zM19.969 26c-3.312 0-6-2.688-6-6s2.688-6 6-6 6 2.688 6 6-2.688 6-6 6z" fill="#1388D6" transform="matrix(0.91,0,0,0.91,1.8,1.8)" xmlns="http://www.w3.org/2000/svg"></path>
@@ -31,16 +34,16 @@
 				</g>
             </defs>
             <rect id="bg" width="100%" height="99.3%" fill="url(#grid)" def="bg"></rect>
-            <g id="LAYER_CONNECTION">
-            </g>
             <g id="LAYER_DRAGGING">
             </g>
+            <root-line></root-line>
             <root-node></root-node>
         </svg>
     </div>
 </template>
 <script>
 import RootNode from '../../components/rootNode.vue';
+import RootLine from '../../components/rootLine.vue';
 
 export default {
     data() {
@@ -61,7 +64,8 @@ export default {
 
     },
     components: {
-        RootNode
+        RootNode,
+        RootLine
     }
 };
 </script>

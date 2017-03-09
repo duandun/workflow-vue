@@ -1,5 +1,5 @@
 module.exports = {
     name: '#user_icon',
-    x: '0px',
-    y: '0px'
+    x: 0,
+    y: 0
 };

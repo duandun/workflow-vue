@@ -2,8 +2,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import createLogger from 'vuex/dist/logger';
 import Lines from './lines';
-import nodes from './nodes';
+import Nodes from './nodes';
 import Drag from './drag';
+import Global from './global';
 
 Vue.use(Vuex);
 
@@ -17,7 +18,8 @@ export default new Vuex.Store({
     modules: {
         Drag,
         Lines,
-        nodes
+        Nodes,
+        Global
     },
     strict: debug,
     plugins: debug ? [createLogger()] : []
