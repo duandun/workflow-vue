@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container"  @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
         <svg xmlns="http://www.w3c.org/2000/svg" width="100%" height="100%">
             <defs id="defs">
                 <pattern id="grid" x="0" y="0" width="20"z height="20" patternUnits="userSpaceOnUse">
@@ -34,38 +34,90 @@
 				</g>
             </defs>
             <rect id="bg" width="100%" height="99.3%" fill="url(#grid)" def="bg"></rect>
-            <g id="LAYER_DRAGGING">
-            </g>
             <root-line></root-line>
             <root-node></root-node>
         </svg>
+        <right-menu v-show="showRightMenu" :styleObj="rightMenuPos"
+         @closeMenu="showRightMenu = false"
+         ></right-menu>
     </div>
 </template>
 <script>
 import RootNode from '../../components/rootNode.vue';
 import RootLine from '../../components/rootLine.vue';
+import { mapActions, mapGetters } from 'vuex';
+import { MODE } from '../../constant/conf.js';
+import RightMenu from '../../components/rightMenu.vue';
 
 export default {
     data() {
         return {
-
+            showRightMenu: false,
+            rightMenuPos: {},
+            leftMouseDown: false
         };
     },
     computed: {
-
-    },
-    watch: {
-
+        ...mapGetters({
+            getMousePos: 'getMousePos',
+            mode: 'getMode'
+        })
     },
     created() {
 
     },
     methods: {
-
+        ...mapActions([
+            'changeMousePos',
+            'startToDrag',
+            'stopDrag',
+            'setCurNode',
+            'setCurNodePos',
+            'resetCurNode',
+            'changeDragLineVisible'
+        ]),
+        onMouseDown(event) {
+            if (event.button === 2) {
+                document.oncontextmenu = function(ev) {
+                    ev.preventDefault();
+                    return false;
+                }
+                let mouseX = event.clientX || 0;
+                let mouseY = event.clientY || 0;
+                this.rightMenuPos = {
+                    top: mouseY + 'px',
+                    left: mouseX + 'px'
+                };
+                this.showRightMenu = true;
+                this.leftMouseDown = false;
+                return;
+            }
+            this.showRightMenu = false;
+            this.leftMouseDown = true;
+        },
+        onMouseMove(event) {
+            if (!this.leftMouseDown) {
+                return;
+            }
+            this.changeMousePos({
+                mouseX: event.clientX,
+                mouseY: event.clientY
+            });
+        },
+        onMouseUp(event) {
+            this.leftMouseDown = false;
+            if (this.mode === MODE.LINK) {
+                this.changeDragLineVisible(false);
+                return;
+            }
+            this.stopDrag();
+            this.resetCurNode();
+        }
     },
     components: {
         RootNode,
-        RootLine
+        RootLine,
+        RightMenu
     }
 };
 </script>

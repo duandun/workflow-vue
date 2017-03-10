@@ -1,4 +1,13 @@
+
 import * as CONST from './const.js';
+import R from 'ramda';
+
+// line struct
+// const struct = {
+//     dataKey: helper.guid(),
+//     startNode: node,
+//     endNode: node
+// };
 
 const state = {
     allLines: [],
@@ -42,7 +51,14 @@ const getters = {
 };
 
 const actions = {
-    addOneLine({ commit }, line) {
+    addOneLine({ commit, state }, line) {
+        // 去掉重复线段
+        let eq = (item) =>
+            item.startNode === line.startNode && item.endNode === line.endNode;
+        let res = R.findIndex(eq)(state.allLines);
+        if (res !== -1) {
+            return;
+        }
         commit(CONST.ADD_ONE_LINE, line);
     },
     setLinesPos({ commit }, pos) {

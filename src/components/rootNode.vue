@@ -6,6 +6,7 @@
             @mouseleave="onMouseLeave($event, item)"
             @mousedown="onMouseDown($event, item)"
             @mouseup="onMouseUp($event, item)"
+            :style="{cursor: mouseCursor}"
         ></use>
     </g>
 </template>
@@ -32,6 +33,7 @@ export default {
     },
     data() {
         return {
+            mouseCursor: 'move'
         };
     },
     computed: {
@@ -49,6 +51,9 @@ export default {
                 return;
             }
             this.setCurNodePos(handlePosValue(this.mousePos));
+        },
+        'mode': function() {
+            this.mouseCursor = this.mode === MODE.LINK ? 'pointer' : 'move';
         }
     },
     created() {
