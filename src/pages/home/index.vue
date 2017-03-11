@@ -38,7 +38,7 @@
             <root-node></root-node>
         </svg>
         <right-menu v-show="showRightMenu" :styleObj="rightMenuPos"
-         @closeMenu="showRightMenu = false"
+         @closeMenu="showRightMenu = false" :menus="rightMenus"
          ></right-menu>
     </div>
 </template>
@@ -46,7 +46,7 @@
 import RootNode from '../../components/rootNode.vue';
 import RootLine from '../../components/rootLine.vue';
 import { mapActions, mapGetters } from 'vuex';
-import { MODE } from '../../constant/conf.js';
+import { MODE, RIGHTMENU_CONF } from '../../constant/conf.js';
 import RightMenu from '../../components/rightMenu.vue';
 
 export default {
@@ -54,6 +54,7 @@ export default {
         return {
             showRightMenu: false,
             rightMenuPos: {},
+            rightMenus: [],
             leftMouseDown: false
         };
     },
@@ -88,6 +89,11 @@ export default {
                     top: mouseY + 'px',
                     left: mouseX + 'px'
                 };
+                if (event.target && event.target.getAttribute('data-type') === 'node') {
+                    this.rightMenus = RIGHTMENU_CONF;
+                } else {
+                    this.rightMenus = [RIGHTMENU_CONF[0], RIGHTMENU_CONF[1]];
+                }
                 this.showRightMenu = true;
                 this.leftMouseDown = false;
                 return;

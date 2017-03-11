@@ -45,3 +45,18 @@ export const MODE = {
     LINK: 'link',
     MOVE: 'move'
 };
+
+export const RIGHTMENU_CONF = [
+    {
+        name: '连线模式',
+        dataType: MODE.LINK
+    },
+    {
+        name: '移动模式',
+        dataType: MODE.MOVE
+    },
+    {
+        name: '删除节点',
+        dataType: 'delete'
+    }
+];

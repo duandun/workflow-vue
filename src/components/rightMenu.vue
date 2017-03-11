@@ -1,8 +1,9 @@
 <template lang="html">
     <div class="context-menu" :style="styleObj">
         <ul @mousedown.stop="onMouseDown">
-            <li :data-type="modeType.LINK">连线模式</li>
-            <li :data-type="modeType.MOVE">移动模式</li>
+            <li v-for="item in menus" :data-type="item.dataType">
+                {{ item.name }}
+            </li>
         </ul>
     </div>
 </template>
@@ -10,6 +11,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { MODE } from '../constant/conf.js';
+import R from 'ramda';
 
 export default {
     props: {
@@ -21,16 +23,22 @@ export default {
                     left: 0
                 }
             }
+        },
+        menus: {
+            type: Array,
+            default: function() {
+                return [];
+            }
         }
     },
     data() {
         return {
-            modeType: MODE
         };
     },
     computed: {
         ...mapGetters({
-            mode: 'getMode'
+            mode: 'getMode',
+            curNode: 'getCurNode'
         })
     },
     created() {
@@ -38,12 +46,17 @@ export default {
     },
     methods: {
         ...mapActions([
-            'changeMode'
+            'changeMode',
+            'deleteNode'
         ]),
         onMouseDown(event) {
             let target = event.target || event.srcElement;
             let modeType = target.getAttribute('data-type');
-            this.changeMode(modeType);
+            if (R.contains(modeType, R.values(MODE))) {
+                this.changeMode(modeType);
+            } else {
+                this.deleteNode(this.curNode);
+            }
             this.$emit('closeMenu');
         }
     }

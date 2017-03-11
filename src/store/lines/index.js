@@ -1,5 +1,5 @@
 
-import * as CONST from './const.js';
+import * as CONST from '../global/const.js';
 import R from 'ramda';
 
 // line struct
@@ -8,13 +8,6 @@ import R from 'ramda';
 //     startNode: node,
 //     endNode: node
 // };
-
-const state = {
-    allLines: [],
-    affectedLines: [],
-    dragLine: {},
-    dragLineVisible: false
-};
 
 const mutations = {
     [CONST.ADD_ONE_LINE] (state, line) {
@@ -76,7 +69,6 @@ const actions = {
 };
 
 export default {
-    state,
     mutations,
     getters,
     actions

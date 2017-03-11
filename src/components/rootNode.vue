@@ -69,10 +69,9 @@ export default {
             'changeDragLineVisible'
         ]),
         onMouseDown(event, node) {
+            this.setCurNode(node);
             if (this.mode === MODE.MOVE) {
-                this.setCurNode(node.dataKey).then(() => {
-                    this.startToDrag();
-                });
+                this.startToDrag();
                 return;
             }
             // 显示连接线段

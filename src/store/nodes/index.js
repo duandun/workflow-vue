@@ -1,10 +1,5 @@
-import * as CONST from './const.js';
+import * as CONST from '../global/const.js';
 import R from 'ramda';
-
-const state = {
-    allNodes: [],
-    currentNode: {}
-};
 
 const mutations = {
     [CONST.ADD_ONE_NODE] (state, node) {
@@ -22,6 +17,9 @@ const mutations = {
 const getters = {
     getAllNodes(state) {
         return state.allNodes;
+    },
+    getCurNode(state) {
+        return state.currentNode;
     }
 };
 
@@ -34,10 +32,10 @@ const actions = {
             commit(CONST.SET_POS, pos);
         }
     },
-    setCurNode({ commit, state }, key) {
+    setCurNode({ commit, state }, node) {
         return new Promise((resolve, reject) => {
             let curNode = state.allNodes.find((item) => {
-                    return item.dataKey === key;
+                    return item === node;
                 });
             if (curNode) {
                 commit(CONST.SET_CUR_NODE, curNode);
@@ -47,11 +45,16 @@ const actions = {
     },
     resetCurNode({ commit }) {
         commit(CONST.SET_CUR_NODE, {});
+    },
+    findNodeByKey({ state }, key) {
+        let allNodes = state.allNodes;
+        return allNodes.find(item => {
+            return item.dataKey === key;
+        });
     }
 };
 
 export default {
-    state,
     mutations,
     getters,
     actions
