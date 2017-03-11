@@ -1,13 +1,5 @@
 
-import * as CONST from './const.js';
-
-const state = {
-    pos: {
-        mouseX: 0,
-        mouseY: 0
-    },
-    startDrag: false
-};
+import * as CONST from '../global/const.js';
 
 const mutations = {
     [CONST.TOGGLE_DRAG] (state, flag) {
@@ -40,7 +32,6 @@ const actions = {
 };
 
 export default {
-    state,
     mutations,
     getters,
     actions

@@ -56,6 +56,10 @@ export const RIGHTMENU_CONF = [
         dataType: MODE.MOVE
     },
     {
+        name: '节点属性',
+        dataType: 'properties'
+    },
+    {
         name: '删除节点',
         dataType: 'delete'
     }

@@ -40,6 +40,7 @@
         <right-menu v-show="showRightMenu" :styleObj="rightMenuPos"
          @closeMenu="showRightMenu = false" :menus="rightMenus"
          ></right-menu>
+         <property-panel v-if="showPropertyPanel"></property-panel>
     </div>
 </template>
 <script>
@@ -48,6 +49,7 @@ import RootLine from '../../components/rootLine.vue';
 import { mapActions, mapGetters } from 'vuex';
 import { MODE, RIGHTMENU_CONF } from '../../constant/conf.js';
 import RightMenu from '../../components/rightMenu.vue';
+import PropertyPanel from '../../components/nodes/start.vue';
 
 export default {
     data() {
@@ -61,7 +63,8 @@ export default {
     computed: {
         ...mapGetters({
             getMousePos: 'getMousePos',
-            mode: 'getMode'
+            mode: 'getMode',
+            showPropertyPanel: 'getShowPropertyPanel'
         })
     },
     created() {
@@ -75,7 +78,8 @@ export default {
             'setCurNode',
             'setCurNodePos',
             'resetCurNode',
-            'changeDragLineVisible'
+            'changeDragLineVisible',
+            'changeShowPropertyPanel'
         ]),
         onMouseDown(event) {
             if (event.button === 2) {
@@ -98,6 +102,7 @@ export default {
                 this.leftMouseDown = false;
                 return;
             }
+            this.changeShowPropertyPanel(false);
             this.showRightMenu = false;
             this.leftMouseDown = true;
         },
@@ -117,13 +122,13 @@ export default {
                 return;
             }
             this.stopDrag();
-            this.resetCurNode();
         }
     },
     components: {
         RootNode,
         RootLine,
-        RightMenu
+        RightMenu,
+        PropertyPanel
     }
 };
 </script>

@@ -1,7 +1,5 @@
 
 import * as CONST from './const.js';
-import Lines from '../lines';
-import Nodes from '../nodes';
 import R from 'ramda';
 
 const mutations = {
@@ -19,22 +17,14 @@ const mutations = {
             allLines.splice(allLines.indexOf(item), 1);
         };
         R.forEach(deleteOneLine)(lines);
-    },
-
-    ...Lines.mutations,
-
-    ...Nodes.mutations
+    }
 };
 
 const getters = {
     // global
     getMode(state) {
         return state.mode;
-    },
-
-    ...Lines.getters,
-
-    ...Nodes.getters
+    }
 };
 
 const actions = {
@@ -44,7 +34,7 @@ const actions = {
             commit(CONST.CHANGE_MODE, mode);
         }
     },
-    deleteNode({ state, commit, dispatch }, node) {
+    deleteNode({ state, commit }, node) {
         if (!node) {
             return;
         }
@@ -54,11 +44,7 @@ const actions = {
         };
         let lines = R.filter(comp)(state.allLines);
         commit(CONST.DELETE_LINES, lines);
-    },
-
-    ...Lines.actions,
-
-    ...Nodes.actions
+    }
 };
 
 export default {

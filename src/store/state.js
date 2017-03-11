@@ -4,6 +4,13 @@ export default {
     // global mode
     mode: MODE.MOVE,
 
+    // mouse drag
+    pos: {
+        mouseX: 0,
+        mouseY: 0
+    },
+    startDrag: false,
+
     // lines
     allLines: [],
     affectedLines: [],
@@ -12,5 +19,9 @@ export default {
 
     // nodes
     allNodes: [],
-    currentNode: {}
+    currentNode: {},
+
+    // properties
+    showPropertyPanel: false,
+    propertyPanelPos: {}
 };

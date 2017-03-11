@@ -47,15 +47,18 @@ export default {
     methods: {
         ...mapActions([
             'changeMode',
-            'deleteNode'
+            'deleteNode',
+            'changeShowPropertyPanel'
         ]),
         onMouseDown(event) {
             let target = event.target || event.srcElement;
             let modeType = target.getAttribute('data-type');
             if (R.contains(modeType, R.values(MODE))) {
                 this.changeMode(modeType);
-            } else {
+            } else if (modeType === 'delete') {
                 this.deleteNode(this.curNode);
+            } else if (modeType === 'properties') {
+                this.changeShowPropertyPanel(true);
             }
             this.$emit('closeMenu');
         }
