@@ -22,6 +22,9 @@ const mutations = {
     },
     [CONST.DRAG_LINE_VISIBLE] (state, flag) {
         state.dragLineVisible = flag;
+        if (!flag) {
+            state.dragLine = {};
+        }
     },
     [CONST.DRAG_LINE] (state, line) {
         state.dragLine = line;

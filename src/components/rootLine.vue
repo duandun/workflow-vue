@@ -6,7 +6,7 @@
             :data-key="item.dataKey"
          ></polyline>
 
-         <polyline fill="none" stroke="#909090" stroke-width="2" v-if="dragLineVisible"
+         <polyline fill="none" stroke="#909090" stroke-width="2" v-if="dragLine.startNode"
              cursor="pointer" marker-end="url(#markerArrow)" marker-start=""
              :points="filterPos(`${dragLine.startNode.x},${dragLine.startNode.y} ${dragLine.endNode.x},${dragLine.endNode.y}`, false)"
           ></polyline>
