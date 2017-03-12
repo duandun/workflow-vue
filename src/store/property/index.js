@@ -37,6 +37,9 @@ const actions = {
             commit(CONST.SET_PROPERTY_PANEL_POS, pos);
         }
         commit(CONST.SHOW_PROPERTY_PANEL, flag);
+    },
+    setPropertyPanelPos({ commit }, pos) {
+        commit(CONST.SET_PROPERTY_PANEL_POS, pos);
     }
 };
 

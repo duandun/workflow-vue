@@ -110,9 +110,9 @@ export default {
             this.leftMouseDown = true;
         },
         onMouseMove(event) {
-            if (!this.leftMouseDown) {
-                return;
-            }
+            // if (!this.leftMouseDown) {
+            //     return;
+            // }
             this.changeMousePos({
                 mouseX: event.clientX,
                 mouseY: event.clientY

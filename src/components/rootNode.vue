@@ -33,7 +33,8 @@ export default {
     },
     data() {
         return {
-            mouseCursor: 'move'
+            mouseCursor: 'move',
+            mousedowned: false
         };
     },
     computed: {
@@ -42,12 +43,16 @@ export default {
             mousePos: 'getMousePos',
             mode: 'getMode',
             dragLineVisible: 'getDragLineVisible',
-            dragLine: 'getDragLine'
+            dragLine: 'getDragLine',
+            startDrag: 'getStartDrag'
         })
     },
     watch: {
         'mousePos': function() {
             if (this.mode === MODE.LINK) {
+                return;
+            }
+            if (!this.startDrag || !this.mousedowned) {
                 return;
             }
             this.setCurNodePos(handlePosValue(this.mousePos));
@@ -66,11 +71,16 @@ export default {
             'setCurNode',
             'setCurNodePos',
             'setDragLine',
-            'changeDragLineVisible'
+            'changeDragLineVisible',
+            'resetCurNode'
         ]),
         onMouseDown(event, node) {
             this.setCurNode(node);
+            if (event.button === 2) {
+                return true;
+            }
             if (this.mode === MODE.MOVE) {
+                this.mousedowned = true;
                 this.startToDrag();
                 return;
             }
@@ -93,6 +103,8 @@ export default {
                 }
                 this.addOneLine(line);
             }
+            this.mousedowned = false;
+            this.resetCurNode();
         },
         onMouseLeave(event, node) {
 

@@ -1,9 +1,9 @@
 <template lang="html">
     <rootPanel>
         <div class="" slot="header">
-
+            测试使用
         </div>
-        <p slot="content" @mousedown.stop="onMouseDown">哈哈哈哈的的的啦啦啦</p>
+        <p slot="content" @mousedown="onMouseDown">哈哈哈哈的的的啦啦啦</p>
         <div class="" slot="footer">
 
         </div>
@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         onMouseDown() {
-            alert('click!');
+            // alert('click!');
         }
     },
     components: {
