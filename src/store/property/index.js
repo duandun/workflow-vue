@@ -1,13 +1,14 @@
 import * as CONST from '../global/const.js';
-import { CONF } from '../../constant';
+import R from 'ramda';
 
 const handlePosValue = (pos) => {
-    let screenSize = window.screenSize || 'small';
-    let x = pos.mouseX - CONF.SCREEN_SIZE[screenSize].offsetX - 15;
-    let y = pos.mouseY - CONF.SCREEN_SIZE[screenSize].offsetY - 10;
+    let top = Number(R.replace(/px/g, '', pos.top));
+    let left = Number(R.replace(/px/g, '', pos.left));
+    left += 20;
+
     return {
-        top: y + 'px',
-        left: x + 'px'
+        top: top + 'px',
+        left: left + 'px'
     };
 };
 
@@ -32,7 +33,7 @@ const getters = {
 const actions = {
     changeShowPropertyPanel({ commit, state }, flag) {
         if (flag) {
-            let pos = handlePosValue(state.pos);
+            let pos = handlePosValue(state.rightMenuPos);
             commit(CONST.SET_PROPERTY_PANEL_POS, pos);
         }
         commit(CONST.SHOW_PROPERTY_PANEL, flag);

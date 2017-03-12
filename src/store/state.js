@@ -4,6 +4,11 @@ export default {
     // global mode
     mode: MODE.MOVE,
 
+    rightMenuPos: {
+        top: 0,
+        left: 0
+    },
+
     // mouse drag
     pos: {
         mouseX: 0,

@@ -17,6 +17,9 @@ const mutations = {
             allLines.splice(allLines.indexOf(item), 1);
         };
         R.forEach(deleteOneLine)(lines);
+    },
+    [CONST.SET_RIGHTMENU_POS] (state, pos) {
+        state.rightMenuPos = pos;
     }
 };
 
@@ -24,6 +27,9 @@ const getters = {
     // global
     getMode(state) {
         return state.mode;
+    },
+    getRightMenuPos(state) {
+        return state.rightMenuPos;
     }
 };
 
@@ -44,6 +50,9 @@ const actions = {
         };
         let lines = R.filter(comp)(state.allLines);
         commit(CONST.DELETE_LINES, lines);
+    },
+    setRightMenuPos({ commit }, pos) {
+        commit(CONST.SET_RIGHTMENU_POS, pos);
     }
 };
 

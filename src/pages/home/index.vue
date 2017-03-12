@@ -40,7 +40,8 @@
         <right-menu v-show="showRightMenu" :styleObj="rightMenuPos"
          @closeMenu="showRightMenu = false" :menus="rightMenus"
          ></right-menu>
-         <property-panel v-if="showPropertyPanel"></property-panel>
+         <!-- <property-panel v-if="showPropertyPanel"></property-panel> -->
+         <test-panel v-if="showPropertyPanel"></test-panel>
     </div>
 </template>
 <script>
@@ -49,13 +50,13 @@ import RootLine from '../../components/rootLine.vue';
 import { mapActions, mapGetters } from 'vuex';
 import { MODE, RIGHTMENU_CONF } from '../../constant/conf.js';
 import RightMenu from '../../components/rightMenu.vue';
-import PropertyPanel from '../../components/nodes/start.vue';
+import PropertyPanel from '../../components/propertyPanel.vue';
+import TestPanel from '../../components/testPanel.vue';
 
 export default {
     data() {
         return {
             showRightMenu: false,
-            rightMenuPos: {},
             rightMenus: [],
             leftMouseDown: false
         };
@@ -64,6 +65,7 @@ export default {
         ...mapGetters({
             getMousePos: 'getMousePos',
             mode: 'getMode',
+            rightMenuPos: 'getRightMenuPos',
             showPropertyPanel: 'getShowPropertyPanel'
         })
     },
@@ -79,7 +81,8 @@ export default {
             'setCurNodePos',
             'resetCurNode',
             'changeDragLineVisible',
-            'changeShowPropertyPanel'
+            'changeShowPropertyPanel',
+            'setRightMenuPos'
         ]),
         onMouseDown(event) {
             if (event.button === 2) {
@@ -89,10 +92,10 @@ export default {
                 }
                 let mouseX = event.clientX || 0;
                 let mouseY = event.clientY || 0;
-                this.rightMenuPos = {
+                this.setRightMenuPos({
                     top: mouseY + 'px',
                     left: mouseX + 'px'
-                };
+                });
                 if (event.target && event.target.getAttribute('data-type') === 'node') {
                     this.rightMenus = RIGHTMENU_CONF;
                 } else {
@@ -128,7 +131,8 @@ export default {
         RootNode,
         RootLine,
         RightMenu,
-        PropertyPanel
+        PropertyPanel,
+        TestPanel
     }
 };
 </script>

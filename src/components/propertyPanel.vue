@@ -1,7 +1,13 @@
 <template lang="html">
-    <div class="start-panel" :style="styleObj">
+    <div class="property-panel" :style="styleObj" @mousedown.stop="onMouseDown">
+        <div class="header">
+            <slot name="header"></slot>
+        </div>
         <div class="container">
-
+            <slot name="content" ></slot>
+        </div>
+        <div class="footer">
+            <slot name="footer"></slot>
         </div>
     </div>
 </template>
@@ -26,17 +32,20 @@ export default {
 
     },
     methods: {
-
+        onMouseDown() {
+            return false;
+        }
     }
 };
 </script>
 
 <style lang="sass" scoped>
-    .start-panel {
+    .property-panel {
         width: 200px;
         height: auto;
         position: absolute;
-        background: #bbb;
+        background: #fff;
+        border: 1px solid #74a70e;
         z-index: 990;
 
         .container {

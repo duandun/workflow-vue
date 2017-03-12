@@ -1,5 +1,5 @@
 
-import { StartNode, ForkNode, EndNode, UserNode } from '../components/nodes';
+import { StartNode, ForkNode, EndNode, UserNode } from './nodes';
 
 export const NODES_LIST = [
     {

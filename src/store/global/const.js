@@ -2,6 +2,7 @@
 export const CHANGE_MODE = 'CHNAGE_MODE';
 export const DELETE_NODE = 'DELETE_NODE';
 export const DELETE_LINES = 'DELETE_LINES';
+export const SET_RIGHTMENU_POS = 'SET_RIGHTMENU_POS';
 
 // mouse drag
 export const MOUSE_POS = 'MOUSE_POS';
