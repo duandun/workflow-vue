@@ -41,16 +41,15 @@ export default {
 
 <style lang="sass" scoped>
     .property-panel {
-        width: 200px;
-        height: auto;
         position: absolute;
+        padding: 10px;
         background: #fff;
         border: 1px solid #74a70e;
         z-index: 990;
 
         .container {
             width: 100%;
-            height: 200px;
+            height: auto;
         }
     }
 </style>
