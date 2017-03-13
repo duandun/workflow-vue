@@ -121,11 +121,11 @@ export default {
         },
         onMouseUp(event) {
             this.leftMouseDown = false;
+            this.stopDrag();
             if (this.mode === MODE.LINK) {
                 this.changeDragLineVisible(false);
                 return;
             }
-            this.stopDrag();
         }
     },
     components: {
