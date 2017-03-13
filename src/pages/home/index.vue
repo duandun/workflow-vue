@@ -66,7 +66,9 @@ export default {
             getMousePos: 'getMousePos',
             mode: 'getMode',
             rightMenuPos: 'getRightMenuPos',
-            showPropertyPanel: 'getShowPropertyPanel'
+            showPropertyPanel: 'getShowPropertyPanel',
+            startDrag: 'getStartDrag',
+            dragLineVisible: 'getDragLineVisible'
         })
     },
     created() {
@@ -110,13 +112,12 @@ export default {
             this.leftMouseDown = true;
         },
         onMouseMove(event) {
-            // if (!this.leftMouseDown) {
-            //     return;
-            // }
-            this.changeMousePos({
-                mouseX: event.clientX,
-                mouseY: event.clientY
-            });
+            if (this.startDrag || this.dragLineVisible) {
+                this.changeMousePos({
+                    mouseX: event.clientX,
+                    mouseY: event.clientY
+                });
+            }
         },
         onMouseUp(event) {
             this.leftMouseDown = false;
