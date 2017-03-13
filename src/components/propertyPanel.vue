@@ -1,6 +1,6 @@
 <template lang="html">
-    <div class="property-panel" :style="styleObj" @mousedown.stop="onMouseDown" @mouseup="onMouseUp">
-        <div class="header">
+    <div class="property-panel" :style="styleObj" @mousedown.stop="" @mouseup="onMouseUp">
+        <div class="header" @mousedown="onMouseDown">
             <slot name="header"></slot>
         </div>
         <div class="container">
