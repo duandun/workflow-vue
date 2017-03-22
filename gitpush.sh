@@ -1,12 +1,15 @@
 #!/bin/sh
 git add .
 FLAG=$(git status | grep "nothing to commit, working tree clean")
-echo $FLAG
+if [[ $FLAG ]]; then
+    echo $FLAG
+    exit 0
+fi
 echo "input commit comments:"
 read comments
 if [[ $comments ]]; then
     echo $comments
-#    git commit -m $comments
+    git commit -m $comments
 else
     exit 1
 fi
