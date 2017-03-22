@@ -11,7 +11,7 @@ fi
 read -p "input commit comments: " comments
 if [[ $comments ]]; then
     echo $comments
-    git commit -m $comments
+    git commit -m "$comments"
 else
     exit 1
 fi
