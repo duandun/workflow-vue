@@ -18,7 +18,7 @@ fi
 
 read -p "push to origin " branch
 if [[ $branch ]]; then
-    CURRENT_BRANCH=$(git branch | grep '^\*\s\w\+')
+    CURRENT_BRANCH=$(git branch | grep -E '^\*\s\w+')
     if [[ $CURRENT_BRANCH != $branch ]]; then
         read -p "current branch is $CURRENT_BRANCH , do you want to push to $branch ? (y/n)" CONTINUE
         if [[ $CONTINUE == "y" ]]; then
