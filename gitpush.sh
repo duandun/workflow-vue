@@ -4,15 +4,18 @@ FLAG=$(git status | grep "nothing to commit, working tree clean")
 if [[ $FLAG ]]; then
     echo $FLAG
     exit 0
+else
+    git status
 fi
-echo "input commit comments:"
-read comments
+
+read -p "input commit comments: " comments
 if [[ $comments ]]; then
     echo $comments
     git commit -m $comments
 else
     exit 1
 fi
+
 read -p "push to origin " branch
 if [[ $branch ]]; then
     echo "pushing to origin $branch ..."
