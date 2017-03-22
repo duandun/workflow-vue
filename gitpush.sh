@@ -5,15 +5,15 @@ echo "input commit comments:"
 read comments
 if [[ $comments ]]; then
     echo $comments
+    git commit -m $comments
 else
     exit 1
 fi
-echo "push to github now ? (y/n)"
-read flag
-if [[ $flag == "y" ]]; then
-    echo "yes"
-elif [[ $flag == "n" ]]; then
-    echo "no"
+read -p "push to origin " branch
+if [[ $branch ]]; then
+    echo "pushing to origin $branch ..."
+    git push -u origin $branch
 else
-    echo "other"
+    echo "canceled push"
+    exit 0
 fi
