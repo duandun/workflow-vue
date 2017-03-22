@@ -3,7 +3,7 @@
         <div class="pull-left hidden-xs">
             <b>Version</b> {{ version }}
         </div>
-        <div class="social-link">
+        <div class="pull-right social-link">
             <a href="https://github.com/duandun/workflow-vue" class="github-link" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
         </div>
     </footer>
@@ -30,6 +30,10 @@
 <style lang="sass" scoped>
     .main-footer {
         display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
         padding: 15px;
         transition: transform .3s ease-in-out, margin-left .3s ease-in-out;
         margin-left: 230px;
@@ -52,14 +56,20 @@
         line-height: 32px;
     }
     .social-link {
-        float: right;
+        margin-right: 230px;
+        transition: transform .3s ease-in-out, margin-right .3s ease-in-out;
     }
-    .sidebar-collapse .main-footer {
-      -webkit-transform: translate(0, 0);
-      -ms-transform: translate(0, 0);
-      -o-transform: translate(0, 0);
-      transform: translate(0, 0);
-      margin-left: 0 !important;
-      z-index: 800;
+    .sidebar-collapse {
+        .main-footer {
+          -webkit-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+          -o-transform: translate(0, 0);
+          transform: translate(0, 0);
+          margin-left: 0 !important;
+          z-index: 800;
+        }
+        .social-link {
+            margin-right: 0 !important;
+        }
     }
 </style>

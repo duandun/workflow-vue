@@ -19,8 +19,8 @@ import { helper } from '../utils';
 
 const handlePosValue = (pos) => {
     let screenSize = window.screenSize || 'small';
-    let x = pos.mouseX - CONF.SCREEN_SIZE[screenSize].offsetX - 15;
-    let y = pos.mouseY - CONF.SCREEN_SIZE[screenSize].offsetY - 10;
+    let x = pos.mouseX - CONF.SCREEN_SIZE[screenSize].offsetX;
+    let y = pos.mouseY - CONF.SCREEN_SIZE[screenSize].offsetY;
     return {
         x,
         y
@@ -75,6 +75,12 @@ export default {
             'resetCurNode'
         ]),
         onMouseDown(event, node) {
+            let tmp = handlePosValue({
+                mouseX: event.clientX || 0,
+                mouseY: event.clientY || 0
+            });
+            node['offsetX'] = tmp.x - (Number(node.x) || 0);
+            node['offsetY'] = tmp.y - (Number(node.y) || 0);
             this.setCurNode(node);
             if (event.button === 2) {
                 return true;

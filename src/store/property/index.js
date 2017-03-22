@@ -1,4 +1,4 @@
-import * as CONST from '../global/const.js';
+import * as CONST from '../const.js';
 import R from 'ramda';
 
 const handlePosValue = (pos) => {

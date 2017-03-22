@@ -1,4 +1,4 @@
-import * as CONST from '../global/const.js';
+import * as CONST from '../const.js';
 import R from 'ramda';
 
 const mutations = {
@@ -29,6 +29,8 @@ const actions = {
     },
     setCurNodePos({ commit, state }, pos) {
         if (!R.isEmpty(state.currentNode)) {
+            pos.x -= state.currentNode.offsetX;
+            pos.y -= state.currentNode.offsetY;
             commit(CONST.SET_POS, pos);
         }
     },

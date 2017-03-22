@@ -1,5 +1,5 @@
 
-import * as CONST from '../global/const.js';
+import * as CONST from '../const.js';
 
 const mutations = {
     [CONST.TOGGLE_DRAG] (state, flag) {

@@ -1,5 +1,5 @@
 
-import * as CONST from './const.js';
+import * as CONST from '../const.js';
 import R from 'ramda';
 
 const mutations = {

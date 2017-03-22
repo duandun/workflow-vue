@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import createLogger from 'vuex/dist/logger';
 import Drag from './drag';
-import Global from './global';
+import Common from './common';
 import State from './state.js';
 import Lines from './lines';
 import Nodes from './nodes';
@@ -17,21 +17,21 @@ export default new Vuex.Store({
         ...State
     },
     mutations: {
-        ...Global.mutations,
+        ...Common.mutations,
         ...Lines.mutations,
         ...Nodes.mutations,
         ...Property.mutations,
         ...Drag.mutations
     },
     actions: {
-        ...Global.actions,
+        ...Common.actions,
         ...Lines.actions,
         ...Nodes.actions,
         ...Property.actions,
         ...Drag.actions
     },
     getters: {
-        ...Global.getters,
+        ...Common.getters,
         ...Lines.getters,
         ...Nodes.getters,
         ...Property.getters,
