@@ -2,7 +2,7 @@
 git add .
 FLAG=$(git status | grep "nothing to commit, working tree clean")
 if [[ $FLAG ]]; then
-    echo $FLAG
+    git status
     exit 0
 else
     git status
