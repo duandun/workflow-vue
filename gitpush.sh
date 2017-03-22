@@ -25,6 +25,7 @@ if [[ $branch ]]; then
             git push origin $branch
             exit 0
         else
+            echo "canceled push"
             exit 0
         fi
     else
