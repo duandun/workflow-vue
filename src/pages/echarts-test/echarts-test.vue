@@ -6,6 +6,7 @@
 
 <script>
 import echarts from 'echarts';
+require('./custom-theme.js');
 
 export default {
     data() {
@@ -13,8 +14,10 @@ export default {
 
         }
     },
+    created() {
+    },
     mounted() {
-        let myChart = echarts.init(document.querySelector('#test-echarts'));
+        let myChart = echarts.init(document.querySelector('#test-echarts'), 'purple-passion');
         myChart.setOption({
             title: { text: 'ECharts 入门示例' },
             tooltip: {},
@@ -28,13 +31,15 @@ export default {
                 data: [5, 20, 36, 10, 10, 20]
             }]
         });
+        window.onresize = myChart.resize;
     }
 }
 </script>
 
 <style lang="sass">
     .echarts-container {
-        width: 100%;
-        height: 100%;
+        margin: 10px auto;
+        width: 80%;
+        height: 80%;
     }
 </style>

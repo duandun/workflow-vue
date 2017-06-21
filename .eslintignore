@@ -2,5 +2,6 @@ server.js
 gulpfile.js
 webpack.config.js
 src/libs/llqrcode.js
-
-
+src/pages/echarts-test/*
+src/pages/echarts-test/custom-theme.js
+src/pages/echarts-test/macarons.js
