@@ -8,6 +8,9 @@ const TestEcharts = resolve => {
 const TestD3 = resolve => {
     require(['../pages/d3-test/d3-test.vue'], resolve);
 };
+const TestCanvas = resolve => {
+    require(['../pages/canvas-test/canvas-test.vue'], resolve);
+};
 
 const routers = [{
     path: '/',
@@ -23,6 +26,9 @@ const routers = [{
     }, {
         path: '/test/d3',
         component: TestD3
+    }, {
+        path: '/test/canvas',
+        component: TestCanvas
     }]
 );
 

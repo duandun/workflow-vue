@@ -19,17 +19,16 @@ export default {
     mounted() {
         const margin = {top: 20, right: 20, bottom: 30, left: 40};
         const width = 960 - margin.left - margin.right;
-        const height = 500 - margin.top - margin.bottom;
+        const height = 600 - margin.top - margin.bottom;
+        const datasetV = [5, 20, 36, 10, 10, 20];
+        const datasetN = ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'];
 
         this.svg = d3.select('.d3-container').append('svg')
                     .attr('width', 960)
-                    .attr('height', 500);
+                    .attr('height', 600);
         this.inner = this.svg.append('g')
                     .attr('transform', `translate(${margin.left}, ${margin.top})`);
         let g = this.inner;
-        let datasetV = [10, 20, 30, 40, 33, 24];
-        let datasetN = ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'];
-
         let xScale = d3.scaleBand().rangeRound([0, width]).padding(0.1);
         let yScale = d3.scaleLinear()
                 .rangeRound([height, 0]);
@@ -62,6 +61,9 @@ export default {
             .attr('width', xScale.bandwidth())
             .attr('height', (d) => {
                 return height - yScale(d);
+            })
+            .on('click', (d, i) => {
+                alert(datasetN[i]);
             });
     },
     methods: {
@@ -83,8 +85,8 @@ export default {
       display: none;
     }
     .d3-container {
-        width: 80%;
+        width: 1000px;
         height: 80%;
-        margin: 10px auto;
+        margin: 50px auto;
     }
 </style>

@@ -6,7 +6,7 @@
 
 <script>
 import echarts from 'echarts';
-require('./custom-theme.js');
+// require('./custom-theme.js');
 
 export default {
     data() {
@@ -17,7 +17,7 @@ export default {
     created() {
     },
     mounted() {
-        let myChart = echarts.init(document.querySelector('#test-echarts'), 'purple-passion');
+        let myChart = echarts.init(document.querySelector('#test-echarts'));
         myChart.setOption({
             title: { text: 'ECharts 入门示例' },
             tooltip: {},
@@ -28,7 +28,7 @@ export default {
             series: [{
                 name: '销量',
                 type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
+                data: [5, 20, null, 10, 10, 20]
             }]
         });
         window.onresize = myChart.resize;
@@ -39,7 +39,7 @@ export default {
 <style lang="sass">
     .echarts-container {
         margin: 10px auto;
-        width: 80%;
+        width: 1000px;
         height: 80%;
     }
 </style>
